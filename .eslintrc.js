@@ -1,11 +1,12 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
   extends: [
-    'standard'
+    'standard',
   ],
   rules: {
-  }
+    'comma-dangle': ['error', 'always-multiline'],
+  },
 }

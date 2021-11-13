@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -14,27 +14,27 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
-            loader: 'postcss-loader'
-          }
-        ]
+            loader: 'postcss-loader',
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
       favicon: './public/favicon.ico',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
     new CopyPlugin({
       patterns: [
@@ -44,10 +44,10 @@ module.exports = {
           globOptions: {
             dot: true,
             gitignore: true,
-            ignore: ['**/*.html', '**/favicon.ico']
-          }
-        }
-      ]
-    })
-  ]
+            ignore: ['**/*.html', '**/favicon.ico'],
+          },
+        },
+      ],
+    }),
+  ],
 }
