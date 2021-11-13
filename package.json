@@ -1,0 +1,28 @@
+{
+  "name": "vanillajs-kanggo-nyobak",
+  "version": "1.0.0",
+  "description": "projek vanillajs (plain js) coba-coba",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "lint": "eslint --ext .js --ignore-path .eslintignore .",
+    "lint:fix": "eslint --fix --ext .js --ignore-path .eslintignore ."
+  },
+  "author": "faizalami (f.a.faizal.amiruddin@gmail.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
+  }
+}
