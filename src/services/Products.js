@@ -39,6 +39,8 @@ class Products {
           'Content-Type': 'multipart/form-data',
         },
       })
+      this.getAll()
+
       return {
         success: status === 200,
         data,
@@ -60,6 +62,8 @@ class Products {
           'Content-Type': 'multipart/form-data',
         },
       })
+      this.getAll()
+
       return {
         success: status === 200,
         data,
