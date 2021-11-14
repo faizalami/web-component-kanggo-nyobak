@@ -32,14 +32,13 @@ class Products {
     }
   }
 
-  async create (context, payload) {
+  async create (payload) {
     try {
       const { status, data } = await axios.post('/products', payload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      this.getAll()
 
       return {
         success: status === 200,
@@ -55,14 +54,13 @@ class Products {
     }
   }
 
-  async update (context, { id, payload }) {
+  async update (id, payload) {
     try {
       const { status, data } = await axios.put(`/products/${id}`, payload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      this.getAll()
 
       return {
         success: status === 200,
@@ -78,10 +76,9 @@ class Products {
     }
   }
 
-  async delete ({ dispatch }, id) {
+  async delete (id) {
     try {
       const { status, data } = await axios.delete(`/products/${id}`)
-      this.getAll()
 
       return {
         success: status === 200,
@@ -98,4 +95,4 @@ class Products {
   }
 }
 
-export default Products
+export default new Products()

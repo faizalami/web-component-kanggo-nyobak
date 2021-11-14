@@ -2,24 +2,28 @@ import 'tailwindcss/tailwind.css'
 import './layout/AppLayout'
 import './components/ProductList'
 import './components/FormModal'
+import './components/DeleteModal'
 import Products from './services/Products'
 
 class App {
-  constructor () {
-    this._productService = new Products()
-  }
-
   init () {
     this.render()
-    this._initModal()
+    this._initModals()
     this._initEvents()
     this.loadProduct()
   }
 
-  _initModal () {
+  _initModals () {
     if (!document.body.querySelector('form-modal')) {
       this._formModal = document.createElement('form-modal')
       document.body.appendChild(this._formModal)
+    }
+    if (!document.body.querySelector('delete-modal')) {
+      this._deleteModal = document.createElement('delete-modal')
+      this._deleteModal.onDeleteSuccess(async () => {
+        await this.loadProduct()
+      })
+      document.body.appendChild(this._deleteModal)
     }
   }
 
@@ -30,15 +34,20 @@ class App {
   }
 
   async loadProduct () {
-    await this._productService.getAll()
+    document.body.querySelector('#product-list').innerHTML = ''
+    await Products.getAll()
     const productList = document.createElement('product-list')
     productList.setAttribute('class', 'w-full grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8')
-    productList.products = this._productService.data.map(product => ({
+    productList.products = Products.data.map(product => ({
       ...product,
       picture: product.picture ? `${process.env.API_BASE_URL}${product.picture.formats.thumbnail.url}` : null,
     }))
     productList.onItemShowClick(() => {
       this._formModal.show()
+    })
+    productList.onItemDeleteClick(product => {
+      this._deleteModal.product = product
+      this._deleteModal.show()
     })
     document.body.querySelector('#product-list').appendChild(productList)
   }
