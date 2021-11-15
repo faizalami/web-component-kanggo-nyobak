@@ -48,6 +48,7 @@ class App {
 
   _initEvents () {
     document.body.querySelector('#create-button').addEventListener('click', () => {
+      this._formModal.product = null
       this._formModal.show()
     })
   }
