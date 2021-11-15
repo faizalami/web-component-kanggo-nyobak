@@ -50,7 +50,7 @@ class ProductItem extends HTMLElement {
       this.innerHTML = `
         <div class="group text-left rounded-lg border border-gray-200">
           <div id="thumbnail-wrapper" class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-            <img src="${this._product.picture || 'pictures/product-thumbnail.jpg'}" alt="${this._product.name}" class="w-full h-full object-center object-cover group-hover:opacity-75">
+            <img src="${this._product?.picture || 'pictures/product-thumbnail.jpg'}" alt="${this._product?.name || ''}" class="w-full h-full object-center object-cover group-hover:opacity-75">
           </div>
           
           <div class="p-3">
@@ -73,10 +73,10 @@ class ProductItem extends HTMLElement {
               </button>
             </div>
             <h3 class="mt-2 text-lg text-gray-700">
-              ${this._product.name}
+              ${this._product?.name || ''}
             </h3>
             <p class="mt-1 text-lg font-medium text-gray-900">
-              Rp ${this._product.price}
+              Rp ${this._product?.price || ''}
             </p>
           </div>
         </div>

@@ -16,11 +16,14 @@ class App {
   _initModals () {
     if (!document.body.querySelector('form-modal')) {
       this._formModal = document.createElement('form-modal')
+      this._formModal.onSaveCompleted(async () => {
+        await this.loadProduct()
+      })
       document.body.appendChild(this._formModal)
     }
     if (!document.body.querySelector('delete-modal')) {
       this._deleteModal = document.createElement('delete-modal')
-      this._deleteModal.onDeleteSuccess(async () => {
+      this._deleteModal.onDeleteCompleted(async () => {
         await this.loadProduct()
       })
       document.body.appendChild(this._deleteModal)
@@ -42,8 +45,13 @@ class App {
       ...product,
       picture: product.picture ? `${process.env.API_BASE_URL}${product.picture.formats.thumbnail.url}` : null,
     }))
-    productList.onItemShowClick(() => {
-      this._formModal.show()
+    productList.onItemShowClick(product => {
+      this._formModal.product = product
+      this._formModal.show('detail')
+    })
+    productList.onItemEditClick(product => {
+      this._formModal.product = product
+      this._formModal.show('edit')
     })
     productList.onItemDeleteClick(product => {
       this._deleteModal.product = product

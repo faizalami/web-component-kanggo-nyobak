@@ -27,8 +27,8 @@ class DeleteModal extends HTMLElement {
     this.setAttribute('show', show ? 'false' : 'true')
   }
 
-  onDeleteSuccess (handler) {
-    this._onDeleteSuccess = handler
+  onDeleteCompleted (handler) {
+    this._onDeleteCompleted = handler
     this.render()
   }
 
@@ -38,9 +38,10 @@ class DeleteModal extends HTMLElement {
     })
     this.querySelector('#delete-process-button').addEventListener('click', async () => {
       if (this._product) {
-        await Products.delete(this._product.id)
-        if (this._onDeleteSuccess) {
-          this._onDeleteSuccess()
+        const response = await Products.delete(this._product.id)
+
+        if (this._onDeleteCompleted) {
+          this._onDeleteCompleted(response)
         }
         this.hide()
       }
