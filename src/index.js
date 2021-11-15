@@ -3,6 +3,7 @@ import './layout/AppLayout'
 import './components/ProductList'
 import './components/FormModal'
 import './components/DeleteModal'
+import './components/NotificationToast'
 import Products from './services/Products'
 
 class App {
@@ -16,17 +17,31 @@ class App {
   _initModals () {
     if (!document.body.querySelector('form-modal')) {
       this._formModal = document.createElement('form-modal')
-      this._formModal.onSaveCompleted(async () => {
-        await this.loadProduct()
+      this._formModal.onSaveCompleted(async response => {
+        if (response.success) {
+          this._notificationToast.show('success', 'Product saved successfully.')
+          await this.loadProduct()
+        } else {
+          this._notificationToast.show('failed', 'Product failed to save.')
+        }
       })
       document.body.appendChild(this._formModal)
     }
     if (!document.body.querySelector('delete-modal')) {
       this._deleteModal = document.createElement('delete-modal')
-      this._deleteModal.onDeleteCompleted(async () => {
-        await this.loadProduct()
+      this._deleteModal.onDeleteCompleted(async response => {
+        if (response.success) {
+          this._notificationToast.show('success', 'Product deleted successfully.')
+          await this.loadProduct()
+        } else {
+          this._notificationToast.show('failed', 'Product failed to delete.')
+        }
       })
       document.body.appendChild(this._deleteModal)
+    }
+    if (!document.body.querySelector('notification-toast')) {
+      this._notificationToast = document.createElement('notification-toast')
+      document.body.appendChild(this._notificationToast)
     }
   }
 
