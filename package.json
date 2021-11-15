@@ -1,8 +1,7 @@
 {
-  "name": "vanillajs-kanggo-nyobak",
+  "name": "web-component-kanggo-nyobak",
   "version": "1.0.0",
-  "description": "projek vanillajs (plain js) coba-coba",
-  "main": "./src/index.js",
+  "description": "projek web-component coba-coba",
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",

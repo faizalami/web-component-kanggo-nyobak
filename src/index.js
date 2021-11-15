@@ -1,3 +1,4 @@
+import 'regenerator-runtime'
 import 'tailwindcss/tailwind.css'
 import './layout/AppLayout'
 import './components/ProductList'
